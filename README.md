@@ -1,93 +1,192 @@
-# 2600-A2
+# Hosting a Resume Website Using MkDocs and GitLab Pages
+## Purpose
+This document explains how to create and publish a resume using modern technical documentation tools. The goal is to show how a resume written in Markdown can be converted into a website using a static site generator and hosted online with the help of a forge and a version control platform.
 
+This guide is written with Marvin McLaren in mind. He is the finance manager at Foomatic. Like Marvin, you should have basic familiarity with Markdown, and I will assume you also have little to no experience with Git, static site generators, or software development tools. We will be performing simple command line operations, so if you know the basics in that regard you are good to go.
 
+By following this guide, you will learn how to turn a Markdown document into a fully hosted website. The guide also demonstrates key ideas from Andrew Etter's *Modern Technical Writing*, which promotes using simple tools and automated systems for writing and publishing documentation.
 
-## Getting started
+Etter argues that modern technical documentation should rely on four main components:
+* Lightweight markup languages
+* Distributed version control systems
+* Static site generators
+* Forges for hosting code and documentation
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+This project uses Markdown, Git, MkDocs, and GitLab Pages to demonstrate these principles in practice.
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+This guide demonstrates the workflow recommended in *Modern Technical Writing*: writing documentation in a lightweight markup language, managing it with version control, generating a static website, and publishing it through a forge.
+## Prerequisites
+Before starting, you will need the following tools installed on your computer.
+### Required Software
+* Python - required to run MkDocs
+* Git - Used for version control
+* MkDocs - static site generator used to create the website
+* A web browser
+* A GitLab account
 
-## Add your files
+### Basic Knowledge
+You should already know:
+* basic Markdown formatting
+* how to open a terminal
+* how to run simple commands
 
-* [Create](https://docs.gitlab.com/user/project/repository/web_editor/#create-a-file) or [upload](https://docs.gitlab.com/user/project/repository/web_editor/#upload-a-file) files
-* [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
+Andrew Etter emphasizes using tools that are easy to learn and widely available. Markdown and Git are commonly used in modern documentation workflows because they are simple, flexible, and compatible with many platforms.
 
+## Instructions
+The following steps explain how Marvin or anyone else who meets the prerequisites can create and host a resume website.
+
+### Step 1: Create a new MkDocs project
+1. First, install MkDocs by running the following command in your terminal:
+```shell
+pip install mkdocs
 ```
-cd existing_repo
-git remote add origin https://code.cs.umanitoba.ca/matesos/2600-a2.git
-git branch -M main
-git push -uf origin main
+2. After you have successfully installed MkDocs, you want to create a project and go into the directory
 ```
+mkdocs new my-project
+cd my-project
+```
+> [!NOTE]
+> 'my-project' is a placeholder for the project name and you should choose what it should be.
+3. To host your MkDocs server locally, make sure you are in the project directory and run
+```shell
+mkdocs serve
+```
+After this runs successfully, you will be able to find your static website running locally in your browser at the address:
+```
+http://127.0.0.1:8000
+```
+### Step 2: Write the resume in Markdown
+Next, open the file located at:
+```
+docs/index.md
+```
+This file will become the homepage of the website. You may replace the existing content with your resume information.
 
-## Integrate with your tools
+Example:
+```md
+# Steve Kakina Mateso
 
-* [Set up project integrations](https://code.cs.umanitoba.ca/matesos/2600-a2/-/settings/integrations)
+## Education
+University of Manitoba  
+Bachelor of Science in Computer Science
 
-## Collaborate with your team
+## Skills
+- C++
+- Python
+- Git
+```
+Markdown is an example of a lightweight markup language. According to Etter, lightweight markup languages are ideal for documentation because they keep files readable while still allowing them to be converted into structured websites. Unlike complex document formats, Markdown files can be easily stored in version control systems.
+### Step 3: Configure the Website
+MkDocs uses a configuration file called:
+```
+mkdocs.yml
+```
+This file defines the website's title and navigation.
+Example configuration:
+```yml
+site_name: Steve Kakina Mateso Resume
 
-* [Invite team members and collaborators](https://docs.gitlab.com/user/project/members/)
-* [Create a new merge request](https://docs.gitlab.com/user/project/merge_requests/creating_merge_requests/)
-* [Automatically close issues from merge requests](https://docs.gitlab.com/user/project/issues/managing_issues/#closing-issues-automatically)
-* [Enable merge request approvals](https://docs.gitlab.com/user/project/merge_requests/approvals/)
-* [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
+nav:
+  - Resume: index.md
+```
+This configuration tells MkDocs to display the Markdown file as the main page.
 
-## Test and Deploy
+Static site generators like MkDocs automate the process of turning documentation into websites. Etter recommends static site generators because they make publishing documentation faster and more consistent.
 
-Use the built-in continuous integration in GitLab.
+### Step 4: Initialize version control with Git
+Create a Git repository to track changes to the project.
 
-* [Get started with GitLab CI/CD](https://docs.gitlab.com/ci/quick_start/)
-* [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/user/application_security/sast/)
-* [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/topics/autodevops/requirements/)
-* [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/user/clusters/agent/)
-* [Set up protected environments](https://docs.gitlab.com/ci/environments/protected_environments/)
+Run the following commands:
+```shell
+git init
+git add .
+git commit -m "Initial commit"
+```
+Git is a distributed version control system, which Etter recommends for managing documentation projects. Version control systems allow authors to track revisions, collaborate with others, and maintain a history of changes. We will use Git to publish the resume website online.
 
-***
+### Step 5: Create a repository on GitLab
+Create a repository on GitLab and connect it to your project so the site can be hosted online. GitLab will be used to host the resume website.
 
-# Editing this README
+After creating the repository on GitLab, run:
+```shell
+git remote add origin https://gitlab.com/username/resume-site.git
+git push -u origin main
+```
+GitLab is an example of a **forge**, a platform that hosts code repositories and allows collaboration between developers and writers.
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+Andrew Etter recommends publishing documentation on forges because they provide version control hosting, collaboration tools, and automated publishing systems.
 
-## Suggestions for a good README
+### Step 6: Configure GitLab Pages
+GitLab Pages allow static websites to be hosted automatically from a git repository.
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+To enable this, create a file named:
+```
+.gitlab-ci.yml
+```
+Example configuration:
+```yml
+image: python:3.11
 
-## Name
-Choose a self-explaining name for your project.
+before_script:
+  - pip install mkdocs
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+pages:
+  script:
+    - mkdocs build
+    - mv site public
+  artifacts:
+    paths:
+      - public
+  only:
+    - main
+```
+This file tells GitLab to automatically build the MkDocs site and publish it as a website.
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+Automation like this is another principle discussed in *Modern Technical Writing*. Automated systems reduce manual effort and ensure documentation is always published consistently.
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+### Step 7: Access the published website
+Once the pipeline finishes running, Marvin's website will be available online. The URL usually looks like this:
+```
+https://username.gitlab.io/repository-name
+```
+The Markdown resume is now publicly available as a static website.
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+This workflow demonstrates the complete process recommended by Etter:
+1. Writing the documentation in Markdown
+2. Storing it in version control
+3. Generating a static website
+4. Hosting it on a forge
+## Further Resources
+- [Markdown Guide](https://www.markdownguide.org/basic-syntax/)
+- [MkDocs documentation](https://www.mkdocs.org/)
+- [Git Documentation](https://git-scm.com/)
+- [GitLab Pages Documentation](https://docs.gitlab.com/user/project/pages/)
+- [Modern Technical Writing by Andrew Etter](https://www.amazon.ca/Modern-Technical-Writing-Introduction-Documentation-ebook/dp/B01A2QL9SS/ref=sr_1_1?crid=2CIPEV7ORVVEO&dib=eyJ2IjoiMSJ9.93wLcMZhK_JKMGGvtIoUDQ51_XAoWwFCav1fXnkU-NPudkq0g9Rmo9msTPsPQOzRzyUigHCQi8UYO7i5RO1esYp3UU6WMz_eUcm1r2u_fBMhX8ngvbfx0HG64AZdwH0GrDy9c5nE049aFX6S23bVRypcTsGZLSel5RJQhhtiEcYyYNggWL8kU4rJn-A6i6V9ScQu5Me0fGstd0vO3Xe8u0e7kqnOiuuTe8lz-QvbQMPd8y4SQqQdqh828rq2L735x6UbgSgMJNxwoeojjojYkOX5WJoV72E8M0VawzH3324.7XlALisa44at8eO7YTFpz0Z3yjoV3H6Uys9ev3YqHJQ&dib_tag=se&keywords=modern+technical+writing&qid=1772684162&sprefix=Modern+technical%2Caps%2C122&sr=8-1)
+## FAQ
+### Why use Markdown instead of writing HTML?
+Markdown is easier to read and write than HTML. It allows writers to focus on the content rather than formatting details. Andrew Etter recommends lightweight markup languages like Markdown because they are simple, portable, and integrate well with documentation tools.
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+Markdown files also work well with version control systems and static site generators.
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+### Why don't my changes appear on the website after editing the Markdown?
+This usually happens because the site has not been rebuilt.
+If you are previewing the site locally you should run:
+```
+mkdocs serve
+```
+If the site is hosted on GitLab Pages, you must push the changes to GitLab so the automated pipeline can rebuild the website.
+## Credits
+Author
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+**Steve Kakina Mateso**
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+Peer reviewers
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+Jackson Gumprich, and Charles Ostrum
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+Tools used
+* MkDocs static site generator
+* Git distributed version control system
+* GitLab Pages hosting platform
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+These tools were selected because they follow the workflow recommended by Andrew Etter in *Modern Technical Writing*, which encourages using lightweight markup languages, distributed version control, static site generators, and forges to publish documentation efficiently.
