@@ -1,3 +1,5 @@
+> NOTE  
+> This guide explains how to host the resume using GitLab Pages, following the workflow described in *Modern Technical Writing*. The university GitLab instance used for this assignment does not provide CI runners, so the live version of the site was deployed using GitHub Pages instead. The documentation itself still demonstrates the GitLab Pages workflow.
 # Hosting a Resume Website Using MkDocs and GitLab Pages
 ## Purpose
 This document explains how to create and publish a resume using modern technical documentation tools. The goal is to show how a resume written in Markdown can be converted into a website using a static site generator and hosted online with the help of a forge and a version control platform.
