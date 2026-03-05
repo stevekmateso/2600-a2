@@ -7,7 +7,7 @@ pages:
   script:
     - mkdocs build
     - mv site public
-  artifacts:
+  artifacts: 
     paths:
       - public
   only:
